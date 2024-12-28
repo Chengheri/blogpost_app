@@ -11,12 +11,11 @@ with st.sidebar:
 st.title("📑 Write a blog post")
 st.caption(" A streamlit blog post writer powered by OpenAI and AutoGen")
 
-form = st.form("blog post")
 topic = st.text_area("What is the topic of your blog post ?", "")
 num_words = st.number_input(
     "The number of words of your blog post :", value=100, placeholder="Type a number..."
 )
-submitted = form.form_submit_button("Submit")
+submitted = st.form_submit_button("Submit")
 if not openai_api_key:
     st.info("Please add your OpenAI API key to continue.")
 elif submitted:
@@ -32,7 +31,7 @@ elif submitted:
     st.write("### Refined version:")
     st.write(refined_version)
 
-if st.button("Show feedback") and response:
+if st.button("Show feedback") and submitted:
     meta_feedback = orchestrator.get_meta_feedback(response)
     st.write(meta_feedback)
        
