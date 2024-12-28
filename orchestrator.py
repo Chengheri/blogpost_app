@@ -3,12 +3,12 @@ from agent import Agent
 class Orchestrator:
 
     def __init__(self):
-        self.writer = Agent.get_writer()
-        self.critic = Agent.get_critic()
-        self.SEO_reviewer = Agent.get_SEO_reviewer()
-        self.legal_reviewer = Agent.get_legal_reviewer()
-        self.ethics_reviewer = Agent.get_ethics_reviewer()
-        self.meta_reviewer = Agent.get_meta_reviewer()
+        self.writer = Agent().get_writer()
+        self.critic = Agent().get_critic()
+        self.SEO_reviewer = Agent().get_SEO_reviewer()
+        self.legal_reviewer = Agent().get_legal_reviewer()
+        self.ethics_reviewer = Agent().get_ethics_reviewer()
+        self.meta_reviewer = Agent().get_meta_reviewer()
 
     def get_nested_chats(self, max_turns:int=1):
         def reflection_message(recipient, sender):
