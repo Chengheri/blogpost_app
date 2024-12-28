@@ -42,10 +42,8 @@ with st.form(key="blog_post"):
         task = Task(topic, num_words).get_task()
         llm_config = {"model": model, "api_key": openai_api_key}
         orchestrator = Orchestrator(llm_config)
-        st.session_state["orchestrator"] = orchestrator
         response = orchestrator.generate_response(task)
-        st.session_state["response"] = response
-        writer_responses = orchestrator.get_writer_responses(st.session_state["response"])
+        writer_responses = orchestrator.get_writer_responses(response)
         initial_version = writer_responses[0]
         refined_version = writer_responses[1]
         st.write("### Initial version:")
@@ -53,17 +51,16 @@ with st.form(key="blog_post"):
         st.write("### Refined version:")
         st.write(refined_version)
         
-
-        meta_feedback = st.session_state["orchestrator"].get_meta_feedback(st.session_state["response"])
+        cost = orchestrator.get_cost(response)
+        
+        meta_feedback = orchestrator.get_meta_feedback(response)
         stoggle(
             "Show Feedback🖍️",
             meta_feedback,
         )
 
         show_cost = st.checkbox("Show Cost", key="show_cost")
-
         if show_cost:
-            cost = st.session_state["orchestrator"].get_cost(st.session_state["response"])
             st.write(cost)
        
 
