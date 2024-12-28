@@ -77,5 +77,5 @@ class Orchestrator:
         for chat in response.chat_history:
             if chat["name"] == "Critic":
                 critic_responses.append(chat["content"])
-        return critic_responses[1]
+        return critic_responses[-1]
     

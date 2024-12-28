@@ -34,6 +34,7 @@ with st.form("blog post"):
 
         show_feedback = st.form_submit_button("Show feedback")
         if show_feedback:
+            st.write(response)
             meta_feedback = orchestrator.get_meta_feedback(response)
             st.write(meta_feedback)
        
