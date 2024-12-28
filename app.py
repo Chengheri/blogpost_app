@@ -32,8 +32,9 @@ with st.form("blog post"):
         st.write("### Refined version:")
         st.write(refined_version)
 
-if st.button("Show feedback") and submitted:
-    meta_feedback = orchestrator.get_meta_feedback(response)
-    st.write(meta_feedback)
+        show_feedback = st.form_submit_button("Show feedback")
+        if show_feedback:
+            meta_feedback = orchestrator.get_meta_feedback(response)
+            st.write(meta_feedback)
        
 
