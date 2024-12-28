@@ -65,7 +65,7 @@ class Orchestrator:
         )
         return response
 
-    def get_writer_responses(response:object):
+    def get_writer_responses(self, response:object):
         writer_responses = []
         for chat in response.chat_history:
             if chat["name"] == "Writer":

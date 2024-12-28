@@ -12,11 +12,10 @@ st.title("📑 Write a blog post")
 st.caption(" A streamlit blog post writer powered by OpenAI and AutoGen")
 
 with st.form("topic"):
-    topic = st.text_area("What is the topic of your blog post?:", "")
+    topic = st.text_area("What is the topic of your blog post?", "")
     num_words = st.number_input(
         "The number of words of your blog post would be:", value=100, placeholder="Type a number..."
     )
-    st.write("The current number is ", num_words)
     submitted = st.form_submit_button("Submit")
     if not openai_api_key:
         st.info("Please add your OpenAI API key to continue.")
