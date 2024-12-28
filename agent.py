@@ -2,7 +2,7 @@ import autogen
 
 class Agent:
     
-    def __init__(self, llm_config:dict=llm_config):
+    def __init__(self, llm_config:dict):
         self.llm_config = llm_config
 
     def get_writer(self):
