@@ -53,7 +53,7 @@ class Orchestrator:
     def register_nested_chats(self, max_turns:int=1):
         return self.critic.register_nested_chats(
             self.get_nested_chats(max_turns),
-            trigger=self.writer(),
+            trigger=self.writer,
         )
     
     def generate_response(self, task:str, max_turns:int=1):
