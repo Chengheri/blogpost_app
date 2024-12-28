@@ -37,8 +37,8 @@ with st.form("blog post"):
 
         meta_feedback = orchestrator.get_meta_feedback(response)
         stoggle(
-            "Show feedback",
-            meta_feedback,
+            "Show feedback ⤵️",
+            "🖍️", meta_feedback,
         )
        
 
