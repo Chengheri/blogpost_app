@@ -6,8 +6,8 @@ from task import Task
 with st.sidebar:
     openai_api_key = st.text_input("OpenAI API Key", key="llm_api_key", type="password")
     "[Gen an OpenAI API Key](https://platform.openai.com/account/api-keys)"
-    "[View the source code](https://github.com/)"
-    "[![Open in Github Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/)"
+    "[View the source code](https://github.com/Chengheri/blogpost_app)"
+    "[![Open in Github Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Chengheri/blogpost_app)"
 
 st.title("📑 Write a blog post")
 st.caption(" A streamlit blog post writer powered by OpenAI and AutoGen")
