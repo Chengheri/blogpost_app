@@ -12,7 +12,7 @@ class Orchestrator:
         self.meta_reviewer = agent.get_meta_reviewer()
 
     def get_nested_chats(self, max_turns:int=1):
-        def reflection_message(recipient, sender):
+        def reflection_message(recipient, messages, sender, config):
             return f'''Review the following content. 
                 \n\n {recipient.chat_messages_for_summary(sender)[-1]['content']}'''
 
