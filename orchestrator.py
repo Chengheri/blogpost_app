@@ -64,3 +64,10 @@ class Orchestrator:
             summary_method="last_msg"
         )
         return response
+
+    def get_writer_responses(response:object):
+        writer_responses = []
+        for chat in response.chat_history:
+            if chat["name"] == "Writer":
+                writer_responses.append(chat["content"])
+        return writer_responses
