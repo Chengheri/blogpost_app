@@ -30,12 +30,15 @@ for msg in st.session_state.messages:
 if "response" not in st.session_state:
     st.session_state["response"] = None
 
+def form_callback():
+    st.write(st.session_state.show_cost)
+
 with st.form(key="blog_post"):
     topic = st.text_area("What is the topic of your blog post ?", "", key="topic")
     num_words = st.number_input(
         "Which is the expected number of words of your blog post ?", key="num_words", value=100, placeholder="Type a number..."
     )
-    submitted = st.form_submit_button("Submit")
+    submitted = st.form_submit_button("Submit", on_click=form_callback)
     if not openai_api_key:
         st.info("Please add your OpenAI API key to continue.")
     elif submitted:
