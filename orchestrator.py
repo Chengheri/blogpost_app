@@ -56,11 +56,12 @@ class Orchestrator:
             trigger=self.writer(),
         )
     
-    def generate_response(self, task:str):
+    def generate_response(self, task:str, max_turns:int=1):
+        self.register_nested_chats(max_turns)
         response = self.critic.initiate_chat(
             recipient=self.writer,
             message=task,
-            max_turns=2,
+            max_turns=max_turns+1,
             summary_method="last_msg"
         )
         return response
@@ -78,4 +79,10 @@ class Orchestrator:
             if chat["name"] == "Critic":
                 critic_responses.append(chat["content"])
         return critic_responses[-1]
+    
+    def get_cost(self, response:object):
+        cost = response.cost
+        total_cost = round(cost["usage_including_cached_inference"]["total_cost"], 4)
+        cost_non_cached = round(cost["usage_excluding_cached_inference"]["total_cost"], 4)
+        return {"total_cost": total_cost, "cost_non_cached": cost_non_cached}
     

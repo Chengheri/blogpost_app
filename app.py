@@ -8,6 +8,13 @@ from task import Task
 with st.sidebar:
     openai_api_key = st.text_input("OpenAI API Key", key="llm_api_key", type="password")
     "[Gen an OpenAI API Key](https://platform.openai.com/account/api-keys)"
+
+    model = st.selectbox(
+        "Which model do you want to use ?",
+        ("gpt-3.5-turbo", "gpt-4o"),
+    )
+    st.write("You selected:", model)
+
     "[View the source code](https://github.com/Chengheri/blogpost_app)"
 
 st.title("📑 Write a blog post")
@@ -16,14 +23,14 @@ st.caption(" A streamlit blog post writer powered by OpenAI and AutoGen")
 with st.form("blog post"):
     topic = st.text_area("What is the topic of your blog post ?", "")
     num_words = st.number_input(
-        "The number of words of your blog post :", value=100, placeholder="Type a number..."
+        "Which is the expected number of words of your blog post ?", value=100, placeholder="Type a number..."
     )
     submitted = st.form_submit_button("Submit")
     if not openai_api_key:
         st.info("Please add your OpenAI API key to continue.")
     elif submitted:
         task = Task(topic, num_words).get_task()
-        llm_config = {"model": "gpt-3.5-turbo", "api_key": openai_api_key}
+        llm_config = {"model": model, "api_key": openai_api_key}
         orchestrator = Orchestrator(llm_config)
         response = orchestrator.generate_response(task)
         writer_responses = orchestrator.get_writer_responses(response)
@@ -37,7 +44,7 @@ with st.form("blog post"):
 
         meta_feedback = orchestrator.get_meta_feedback(response)
         stoggle(
-            "Show feedback  🖍️",
+            "Show feedback🖍️",
             meta_feedback,
         )
        
