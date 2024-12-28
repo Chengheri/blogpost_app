@@ -1,4 +1,6 @@
 import streamlit as st
+from streamlit_extras.stoggle import stoggle
+
 
 from orchestrator import Orchestrator
 from task import Task
@@ -32,11 +34,11 @@ with st.form("blog post"):
         st.write("### Refined version:")
         st.write(refined_version)
         
-with st.form("feedback"):
-    show_feedback = st.form_submit_button("Show feedback")
-    if show_feedback and response:
+
         meta_feedback = orchestrator.get_meta_feedback(response)
-        st.write("### Feedback")
-        st.write(meta_feedback)
+        stoggle(
+            "Show feedback",
+            meta_feedback,
+        )
        
 
