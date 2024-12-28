@@ -13,7 +13,6 @@ with st.sidebar:
         "Which model do you want to use ?",
         ("gpt-3.5-turbo", "gpt-4o"),
     )
-    st.write("You selected:", model)
 
     "[View the source code](https://github.com/Chengheri/blogpost_app)"
 
@@ -44,8 +43,14 @@ with st.form("blog post"):
 
         meta_feedback = orchestrator.get_meta_feedback(response)
         stoggle(
-            "Show feedback🖍️",
+            "Show Feedback🖍️",
             meta_feedback,
         )
+
+        show_cost = st.checkbox("Show Cost")
+
+        if show_cost:
+            cost = orchestrator.get_cost(response)
+            st.write(cost)
        
 
