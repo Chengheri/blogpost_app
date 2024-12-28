@@ -56,7 +56,7 @@ class Orchestrator:
             trigger=self.writer(),
         )
     
-    def generate_response(self, task:object):
+    def generate_response(self, task:str):
         response = self.critic.initiate_chat(
             recipient=self.writer,
             message=task,
