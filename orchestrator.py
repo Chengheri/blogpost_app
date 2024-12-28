@@ -27,7 +27,8 @@ class Orchestrator:
                 "max_turns": max_turns
             },
             {
-                "recipient": self.legal_reviewer, "message": reflection_message, 
+                "recipient": self.legal_reviewer, 
+                "message": reflection_message, 
                 "summary_method": "reflection_with_llm",
                 "summary_args": {"summary_prompt" : 
                     "Return review into as JSON object only:"
@@ -35,11 +36,12 @@ class Orchestrator:
                 "max_turns": max_turns
             },
             {
-                "recipient": self.ethics_reviewer, "message": reflection_message, 
+                "recipient": self.ethics_reviewer, 
+                "message": reflection_message, 
                 "summary_method": "reflection_with_llm",
                 "summary_args": {"summary_prompt" : 
                     "Return review into as JSON object only:"
-                    "{'reviewer': '', 'review': ''}",},
+                    "{'Reviewer': '', 'Review': ''}",},
                 "max_turns": max_turns
             },
             {
@@ -50,14 +52,11 @@ class Orchestrator:
         ]
         return nested_chats
     
-    def register_nested_chats(self, max_turns:int=1):
-        return self.critic.register_nested_chats(
+    def generate_response(self, task:str, max_turns:int=1):
+        self.critic.register_nested_chats(
             self.get_nested_chats(max_turns),
             trigger=self.writer,
         )
-    
-    def generate_response(self, task:str, max_turns:int=1):
-        self.register_nested_chats(max_turns)
         response = self.critic.initiate_chat(
             recipient=self.writer,
             message=task,
