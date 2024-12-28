@@ -31,10 +31,13 @@ with st.form("blog post"):
         st.write(initial_version)
         st.write("### Refined version:")
         st.write(refined_version)
+        
+        meta_feedback = orchestrator.get_meta_feedback(response)
+        st.write("### Feedback")
+        st.write(meta_feedback)
 
         show_feedback = st.form_submit_button("Show feedback")
-        if show_feedback:
-            st.write(response)
+        if show_feedback and response:
             meta_feedback = orchestrator.get_meta_feedback(response)
             st.write(meta_feedback)
        
