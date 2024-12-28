@@ -1,7 +1,5 @@
 import autogen
 
-llm_config = {"model": "gpt-3.5-turbo"}
-
 class Agent:
     
     def __init__(self, llm_config:dict=llm_config):

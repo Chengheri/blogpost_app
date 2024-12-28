@@ -22,5 +22,6 @@ with st.form("topic"):
         st.info("Please add your OpenAI API key to continue.")
     elif submitted:
         task = Task(topic, num_words)
-        Orchestrator().generate_response(task)
+        llm_config = {"model": "gpt-3.5-turbo", "api_key": openai_api_key}
+        Orchestrator(llm_config).generate_response(task)
 
