@@ -31,5 +31,9 @@ with st.form("topic"):
         st.write(initial_version)
         st.write("### Refined version:")
         st.write(refined_version)
+
+        if st.button("Show feedback"):
+            meta_feedback = orchestrator.get_meta_feedback(response)
+            st.write(meta_feedback)
        
 

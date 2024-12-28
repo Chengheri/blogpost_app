@@ -71,3 +71,11 @@ class Orchestrator:
             if chat["name"] == "Writer":
                 writer_responses.append(chat["content"])
         return writer_responses
+    
+    def get_meta_feedback(self, response:object):
+        critic_responses = []
+        for chat in response.chat_history:
+            if chat["name"] == "Critic":
+                critic_responses.append(chat["content"])
+        return critic_responses[1]
+    
