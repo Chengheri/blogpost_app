@@ -33,8 +33,11 @@ if "response" not in st.session_state:
 if "submitted" not in st.session_state:
     st.session_state["submitted"] = False
 
+if "clicked" not in st.session_state:
+    st.session_state["clicked"] = False
+
 def click_button():
-    st.session_state.clicked = True
+    st.session_state["clicked"] = True
 
 with st.form(key="blog_post"):
     topic = st.text_area("What is the topic of your blog post ?", "", key="topic")
