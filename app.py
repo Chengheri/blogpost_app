@@ -51,17 +51,16 @@ with st.form(key="blog_post"):
         st.write("### Refined version:")
         st.write(refined_version)
         
-        cost = orchestrator.get_cost(response)
-        st.session_state["cost"] = cost
-        
         meta_feedback = orchestrator.get_meta_feedback(response)
         stoggle(
             "Show Feedback🖍️",
             meta_feedback,
         )
 
-        show_cost = st.checkbox("Show Cost", key="show_cost")
-        if show_cost:
-            st.write(st.session_state["cost"])
+        cost = orchestrator.get_cost(response)
+        stoggle(
+            "Show Cost💰",
+            cost,
+        )
        
 
