@@ -30,12 +30,16 @@ for msg in st.session_state.messages:
 if "response" not in st.session_state:
     st.session_state["response"] = None
 
+if "submitted" not in st.session_state:
+    st.session_state["submitted"] = False
+
 with st.form(key="blog_post"):
     topic = st.text_area("What is the topic of your blog post ?", "", key="topic")
     num_words = st.number_input(
         "Which is the expected number of words of your blog post ?", key="num_words", value=100, placeholder="Type a number..."
     )
     submitted = st.form_submit_button("Submit")
+    st.session_state["submitted"] = submitted
     if not openai_api_key:
         st.info("Please add your OpenAI API key to continue.")
     elif submitted:
@@ -51,16 +55,18 @@ with st.form(key="blog_post"):
         st.write("### Refined version:")
         st.write(refined_version)
         
+        cost = orchestrator.get_cost(response)
+        st.session_state["cost"] = cost
+        
         meta_feedback = orchestrator.get_meta_feedback(response)
         stoggle(
             "🖍️Show Feedback",
             meta_feedback,
         )
-
-        cost = orchestrator.get_cost(response)
-        stoggle(
-            "💰Show Cost",
-            str(cost),
-        )
+        
+if st.session_state["submitted"]:
+    show_cost = st.button("Show Cost")
+    if show_cost:
+        st.write(st.session_state["cost"])
        
 
