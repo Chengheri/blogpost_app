@@ -30,6 +30,9 @@ for msg in st.session_state.messages:
 if "response" not in st.session_state:
     st.session_state["response"] = None
 
+if "show_cost" not in st.session_state:
+    st.session_state["show_cost"] = False
+
 def form_callback():
     st.write(st.session_state.show_cost)
 
