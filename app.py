@@ -33,6 +33,9 @@ if "response" not in st.session_state:
 if "submitted" not in st.session_state:
     st.session_state["submitted"] = False
 
+def click_button():
+    st.session_state.clicked = True
+
 with st.form(key="blog_post"):
     topic = st.text_area("What is the topic of your blog post ?", "", key="topic")
     num_words = st.number_input(
@@ -66,8 +69,8 @@ with st.form(key="blog_post"):
         )
         
 if st.session_state["submitted"]:
-    show_cost = st.button("Show Cost")
-    if show_cost:
-        st.write(st.session_state["cost"])
+    st.button("Show Cost", on_click=click_button)
+if st.session_state["clicked"]:
+    st.write(st.session_state["cost"])
        
 
