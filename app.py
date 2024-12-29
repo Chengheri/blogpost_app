@@ -53,14 +53,14 @@ with st.form(key="blog_post"):
         
         meta_feedback = orchestrator.get_meta_feedback(response)
         stoggle(
-            "Show Feedback🖍️",
+            "🖍️Show Feedback",
             meta_feedback,
         )
 
         cost = orchestrator.get_cost(response)
         stoggle(
-            "Show Cost💰",
-            cost,
+            "💰Show Cost",
+            str(cost),
         )
        
 
