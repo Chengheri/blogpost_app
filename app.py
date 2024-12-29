@@ -39,7 +39,7 @@ if "clicked" not in st.session_state:
 def click_button():
     st.session_state["clicked"] = not st.session_state["clicked"]
 
-with st.form(key="blog_post"):
+with st.form(key="blog_post", disabled=not st.session_state["clicked"]):
     topic = st.text_area("What is the topic of your blog post ?", "", key="topic")
     num_words = st.number_input(
         "Which is the expected number of words of your blog post ?", key="num_words", value=100, placeholder="Type a number..."
