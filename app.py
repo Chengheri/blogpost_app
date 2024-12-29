@@ -66,8 +66,8 @@ with st.form(key="blog_post"):
             meta_feedback,
         )
 
-        #show_cost = st.checkbox("Show Cost", key="show_cost")
-        #if show_cost:
-        st.write(st.session_state["cost"])
+        show_cost = st.checkbox("Show Cost", key="show_cost")
+        if show_cost:
+            st.write(st.session_state["cost"])
        
 
